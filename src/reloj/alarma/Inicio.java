@@ -12,7 +12,7 @@ package reloj.alarma;
 public class Inicio extends javax.swing.JFrame {
 
     Display ds=new Display();
-
+    MTiempo mt = new MTiempo();
     /**
      * Creates new form Inicio
      */
@@ -154,10 +154,6 @@ public class Inicio extends javax.swing.JFrame {
         // Boton pospone los beeps, 5 min
     }//GEN-LAST:event_jBposponerActionPerformed
 
-    private void JBverHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBverHoraActionPerformed
-        // Cambia ver la hora, ver la alarma
-    }//GEN-LAST:event_JBverHoraActionPerformed
-
     private void jBhoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBhoraActionPerformed
         // agrega horas a la alarma
         ds.verAddAlarmH();
@@ -173,6 +169,11 @@ public class Inicio extends javax.swing.JFrame {
         //Activar Desactivar la alarma
         ds.AcDesAlarm();
     }//GEN-LAST:event_jBpAlarmActionPerformed
+
+    private void JBverHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBverHoraActionPerformed
+        // Ver alarma
+        ds.verAlarm();
+    }//GEN-LAST:event_JBverHoraActionPerformed
 
     /**
      * @param args the command line arguments

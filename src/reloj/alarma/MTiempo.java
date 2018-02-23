@@ -33,6 +33,9 @@ public class MTiempo {
     Integer intMin=0;
     String min="00";
 
+    // Variable Sleep cuando ves la alarma
+    static boolean USAR_SLEEP=false;
+
     public void mostrarHora() {
         //creamos un Timer
         timer=new Timer();
@@ -41,14 +44,29 @@ public class MTiempo {
         TimerTask timerTask=new TimerTask() {
             @Override
             public void run() {
-                // Acción que quiero que se produzca
-                date=new Date();
-                Inicio.jDHora.setText(dateFormat.format(date));
 
-                // Llamada al metodo Sonar Alarma, para que vaya comparando
-                sonarAlarm();
+                try {
+                    // Tiempo de espera cuando llamo al boton ver alarma
+                    if (USAR_SLEEP) {
+                        Thread.sleep(5000);
+                        USAR_SLEEP=false;
+                    } else {
+                        // Acción que quiero que se produzca
+                        date=new Date();
+                        Inicio.jDHora.setText(dateFormat.format(date));
+
+                        // Llamada al metodo Sonar Alarma, para que vaya comparando
+                        if (Display.alarmON==true) {
+                            sonarAlarm();
+                        }
+                    }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MTiempo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         };
+
         timer.schedule(timerTask, 0, 1000);
     }
 
@@ -67,7 +85,7 @@ public class MTiempo {
     }
 
     public String addHora() {
-
+        this.mSleep();
         if (intHora<9) {
             intHora+=1;
             hora=String.valueOf(intHora);
@@ -84,7 +102,7 @@ public class MTiempo {
     }
 
     public String addMin() {
-
+        this.mSleep();
         if (intMin<9) {
             intMin+=1;
             min=String.valueOf(intMin);
@@ -98,6 +116,21 @@ public class MTiempo {
             min=String.valueOf(intMin);
             return dateInString=hora+":0"+min+":00";
         }
+    }
+
+    public String verAlarm() {
+
+        this.mSleep();
+        return dateInString;
+
+    }
+
+    public void mSleep() {
+        USAR_SLEEP=true;
+    }
+    
+    public void mSnooozer(){
+        dateInString=hora+":"+(min+5)+":00";
     }
 
 }

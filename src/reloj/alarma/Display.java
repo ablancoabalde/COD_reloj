@@ -16,7 +16,8 @@ import javax.swing.ImageIcon;
 public class Display {
 
     MTiempo mt=new MTiempo();
-    Boolean alarmON=true;
+    static Boolean alarmON=false;
+
     public static void insImgSpeaker(Integer width, Integer height) {
 
         // Habilitar para ver imagenes en Windows
@@ -34,27 +35,33 @@ public class Display {
     }
 
     public void AcDesAlarm() {
-        
-        if(alarmON==false){
+
+        if (alarmON==false) {
             Inicio.jRAlarmaOn.setSelected(true);
             mt.sonarAlarm();
             alarmON=true;
+        } else {
+            Inicio.jRAlarmaOn.setSelected(false);
+            alarmON=false;
         }
-        else{
-           Inicio.jRAlarmaOn.setSelected(false);
-           alarmON=false;
-        }
-        
-        
+
     }
 
     public void verAddAlarmH() {
         Inicio.jDHora.setText(mt.addHora());
 
     }
-        public void verAddAlarmM() {
+
+    public void verAddAlarmM() {
         Inicio.jDHora.setText(mt.addMin());
 
     }
+
+    public void verAlarm() {
+        Inicio.jDHora.setText(mt.verAlarm());
+
+    }
+    
+    
 
 }

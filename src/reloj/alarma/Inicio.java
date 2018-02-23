@@ -152,6 +152,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jBposponerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBposponerActionPerformed
         // Boton pospone los beeps, 5 min
+        mt.mSnooozer();
     }//GEN-LAST:event_jBposponerActionPerformed
 
     private void jBhoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBhoraActionPerformed

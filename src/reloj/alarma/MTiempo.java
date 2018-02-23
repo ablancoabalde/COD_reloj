@@ -5,6 +5,7 @@
  */
 package reloj.alarma;
 
+import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,10 +29,10 @@ public class MTiempo {
     Date Alarm;
     static String dateInString="00:00:00";
     // Varible add hora y min alarm
-    Integer intHora=0;
-    String hora="00";
-    Integer intMin=0;
-    String min="00";
+    static Integer intHora=0;
+    static String hora="00";
+    static Integer intMin=0;
+    static String min="00";
 
     // Variable Sleep cuando ves la alarma
     static boolean USAR_SLEEP=false;
@@ -77,6 +78,7 @@ public class MTiempo {
             Alarm=dateFormat.parse(dateInString);
             if (dateFormat.format(date).equalsIgnoreCase(dateFormat.format(Alarm))) {
                 System.out.println("hola");
+                //Implementar el sonido del reloj
             }
         } catch (ParseException ex) {
             Logger.getLogger(MTiempo.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,7 +109,7 @@ public class MTiempo {
             intMin+=1;
             min=String.valueOf(intMin);
             return dateInString=hora+":0"+min+":00";
-        } else if (intMin<60&&intMin>=9) {
+        } else if (intMin<59&&intMin>=9) {
             intMin+=1;
             min=String.valueOf(intMin);
             return dateInString=hora+":"+min+":00";
@@ -128,9 +130,11 @@ public class MTiempo {
     public void mSleep() {
         USAR_SLEEP=true;
     }
-    
-    public void mSnooozer(){
-        dateInString=hora+":"+(min+5)+":00";
+
+    public void mSnooozer() {
+
+        min=String.valueOf(intMin+5);
+        dateInString=hora+":"+(min)+":00";
     }
 
 }

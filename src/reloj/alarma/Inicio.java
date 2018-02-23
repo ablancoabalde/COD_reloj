@@ -11,6 +11,8 @@ package reloj.alarma;
  */
 public class Inicio extends javax.swing.JFrame {
 
+    Display ds=new Display();
+
     /**
      * Creates new form Inicio
      */
@@ -18,10 +20,9 @@ public class Inicio extends javax.swing.JFrame {
         initComponents();
         // Imagen del altavoz
         Display.insImgSpeaker(imgSpeaker.getWidth(), imgSpeaker.getHeight());
-        Display ds=new Display();
 
+        // Inserta la hora en TextField
         ds.insHora();
-        ds.alarm();
 
     }
 
@@ -51,6 +52,8 @@ public class Inicio extends javax.swing.JFrame {
         jDHora.setBackground(new java.awt.Color(0, 0, 0));
         jDHora.setForeground(new java.awt.Color(255, 255, 255));
         jDHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jRAlarmaOn.setForeground(new java.awt.Color(255, 255, 255));
 
         jBposponer.setText("Snoozer");
         jBposponer.addActionListener(new java.awt.event.ActionListener() {
@@ -157,14 +160,18 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jBhoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBhoraActionPerformed
         // agrega horas a la alarma
+        ds.verAddAlarmH();
     }//GEN-LAST:event_jBhoraActionPerformed
 
     private void jBminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBminActionPerformed
         // agrega minutos a la alarma
+        ds.verAddAlarmM();
+        
     }//GEN-LAST:event_jBminActionPerformed
 
     private void jBpAlarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpAlarmActionPerformed
-        // Desactivar la alarma
+        //Activar Desactivar la alarma
+        ds.AcDesAlarm();
     }//GEN-LAST:event_jBpAlarmActionPerformed
 
     /**
@@ -210,6 +217,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jBpAlarm;
     private javax.swing.JButton jBposponer;
     public static javax.swing.JTextField jDHora;
-    private javax.swing.JRadioButton jRAlarmaOn;
+    public static javax.swing.JRadioButton jRAlarmaOn;
     // End of variables declaration//GEN-END:variables
 }

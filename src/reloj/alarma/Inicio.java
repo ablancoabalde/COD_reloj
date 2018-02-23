@@ -16,6 +16,13 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+        // Imagen del altavoz
+        Display.insImgSpeaker(imgSpeaker.getWidth(), imgSpeaker.getHeight());
+        Display ds=new Display();
+
+        ds.insHora();
+        ds.alarm();
+
     }
 
     /**
@@ -28,16 +35,22 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         jDHora = new javax.swing.JTextField();
-        jRAlarma = new javax.swing.JRadioButton();
+        jRAlarmaOn = new javax.swing.JRadioButton();
         jBposponer = new javax.swing.JButton();
-        JBhora = new javax.swing.JButton();
+        JBverHora = new javax.swing.JButton();
         imgSpeaker = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jBpAlarm = new javax.swing.JButton();
         jBmin = new javax.swing.JButton();
         jBhora = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(465, 176));
+        setPreferredSize(new java.awt.Dimension(470, 200));
+        setResizable(false);
+        setSize(new java.awt.Dimension(0, 0));
+
+        jDHora.setBackground(new java.awt.Color(0, 0, 0));
+        jDHora.setForeground(new java.awt.Color(255, 255, 255));
+        jDHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jBposponer.setText("Snoozer");
         jBposponer.addActionListener(new java.awt.event.ActionListener() {
@@ -46,26 +59,23 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        JBhora.setText("Hora/Alarm");
-        JBhora.setMargin(new java.awt.Insets(2, 5, 2, 5));
-        JBhora.addActionListener(new java.awt.event.ActionListener() {
+        JBverHora.setText("Hora/Alarm");
+        JBverHora.setMargin(new java.awt.Insets(2, 3, 2, 3));
+        JBverHora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBhoraActionPerformed(evt);
+                JBverHoraActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Alarm");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jBpAlarm.setText("Alarm");
+        jBpAlarm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jBpAlarmActionPerformed(evt);
             }
         });
 
         jBmin.setText("+M");
         jBmin.setMargin(new java.awt.Insets(2, 5, 2, 5));
-        jBmin.setMaximumSize(new java.awt.Dimension(40, 30));
-        jBmin.setMinimumSize(new java.awt.Dimension(40, 30));
-        jBmin.setPreferredSize(new java.awt.Dimension(40, 30));
         jBmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBminActionPerformed(evt);
@@ -74,9 +84,6 @@ public class Inicio extends javax.swing.JFrame {
 
         jBhora.setText("+H");
         jBhora.setMargin(new java.awt.Insets(2, 5, 2, 5));
-        jBhora.setMaximumSize(new java.awt.Dimension(40, 30));
-        jBhora.setMinimumSize(new java.awt.Dimension(40, 30));
-        jBhora.setPreferredSize(new java.awt.Dimension(40, 30));
         jBhora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBhoraActionPerformed(evt);
@@ -91,74 +98,74 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBposponer)
-                        .addGap(32, 32, 32)
-                        .addComponent(JBhora, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jBmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBhora, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jRAlarma)
-                        .addComponent(jDHora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imgSpeaker, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jBmin, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBposponer)
+                                .addGap(56, 56, 56)
+                                .addComponent(JBverHora)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                                .addComponent(jBhora, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addComponent(jBpAlarm, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDHora, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRAlarmaOn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(imgSpeaker, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBposponer, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBverHora, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(jDHora, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRAlarmaOn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jBposponer, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(JBhora, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jBhora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBmin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 7, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBpAlarm, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDHora, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBhora)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRAlarma, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(imgSpeaker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jBmin)))
+                .addGap(18, 18, 18)
+                .addComponent(imgSpeaker, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBposponerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBposponerActionPerformed
-        // TODO add your handling code here:
+        // Boton pospone los beeps, 5 min
     }//GEN-LAST:event_jBposponerActionPerformed
 
-    private void JBhoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBhoraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JBhoraActionPerformed
+    private void JBverHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBverHoraActionPerformed
+        // Cambia ver la hora, ver la alarma
+    }//GEN-LAST:event_JBverHoraActionPerformed
 
     private void jBhoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBhoraActionPerformed
-        // TODO add your handling code here:
+        // agrega horas a la alarma
     }//GEN-LAST:event_jBhoraActionPerformed
 
     private void jBminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBminActionPerformed
-        // TODO add your handling code here:
+        // agrega minutos a la alarma
     }//GEN-LAST:event_jBminActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void jBpAlarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpAlarmActionPerformed
+        // Desactivar la alarma
+    }//GEN-LAST:event_jBpAlarmActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,13 +203,13 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JBhora;
-    private javax.swing.JLabel imgSpeaker;
+    private javax.swing.JButton JBverHora;
+    public static javax.swing.JLabel imgSpeaker;
     private javax.swing.JButton jBhora;
     private javax.swing.JButton jBmin;
+    private javax.swing.JButton jBpAlarm;
     private javax.swing.JButton jBposponer;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JTextField jDHora;
-    private javax.swing.JRadioButton jRAlarma;
+    public static javax.swing.JTextField jDHora;
+    private javax.swing.JRadioButton jRAlarmaOn;
     // End of variables declaration//GEN-END:variables
 }

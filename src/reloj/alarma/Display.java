@@ -15,17 +15,17 @@ import javax.swing.ImageIcon;
  */
 public class Display {
 
-    MTiempo mt=new MTiempo();
-    static Boolean alarmON=false;
+    MTiempo mt = new MTiempo();
+    static Boolean alarmON = false;
 
     public static void insImgSpeaker(Integer width, Integer height) {
 
         // Habilitar para ver imagenes en Windows
-//            ImageIcon icono = new ImageIcon("D:\\NeatBeansProjects\\Maquina-Cafe\\src\\com\\vasoV.jpg");
+        ImageIcon icono = new ImageIcon("D:\\NeatBeansProjects\\COD_reloj\\src\\source\\speaker.png");
         // Habilitar para ver imagenes en Linux
-        ImageIcon icono=new ImageIcon("src/source/speaker.png");
+        //       ImageIcon icono=new ImageIcon("src/source/speaker.png");
         // Escala la imagen al tamaño de la label
-        Icon icon=new ImageIcon(icono.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+        Icon icon = new ImageIcon(icono.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
         Inicio.imgSpeaker.setIcon(icon);
 
     }
@@ -36,24 +36,27 @@ public class Display {
 
     public void AcDesAlarm() {
 
-        if (alarmON==false) {
+        if (alarmON == false) {
             Inicio.jRAlarmaOn.setSelected(true);
             mt.sonarAlarm();
-            alarmON=true;
+            alarmON = true;
         } else {
             Inicio.jRAlarmaOn.setSelected(false);
-            alarmON=false;
+            Sounds.sonido.close();
+            alarmON = false;
         }
 
     }
 
     public void verAddAlarmH() {
-        Inicio.jDHora.setText(mt.addHora());
+        mt.addHora();
+        Inicio.jDHora.setText(mt.devTiempo());
 
     }
 
     public void verAddAlarmM() {
-        Inicio.jDHora.setText(mt.addMin());
+        mt.addMin();
+        Inicio.jDHora.setText(mt.devTiempo());
 
     }
 
@@ -61,7 +64,5 @@ public class Display {
         Inicio.jDHora.setText(mt.verAlarm());
 
     }
-    
-    
 
 }

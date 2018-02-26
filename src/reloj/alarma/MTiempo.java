@@ -22,27 +22,29 @@ public class MTiempo {
 
     Timer timer;
 
-    SimpleDateFormat dateFormat=new SimpleDateFormat("HH:mm:ss");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     Date date;
 
     // Variables para la alarma
     Date Alarm;
-    static String dateInString="00:00:00";
+    static String dateInString = "00:00:00";
     // Varible add hora y min alarm
-    static Integer intHora=0;
-    static String hora="00";
-    static Integer intMin=0;
-    static String min="00";
+    static Integer intHora = 0;
+    static String hora = "00";
+    static Integer intMin = 0;
+    static String min = "00";
+
+    static Integer numAumentar = 1;
 
     // Variable Sleep cuando ves la alarma
-    static boolean USAR_SLEEP=false;
+    static boolean USAR_SLEEP = false;
 
     public void mostrarHora() {
         //creamos un Timer
-        timer=new Timer();
+        timer = new Timer();
         //Con el Timer ejecutamos la tarea TicTac, con un retardo de 0sg y repetimos cada 1sg
 
-        TimerTask timerTask=new TimerTask() {
+        TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
 
@@ -50,14 +52,14 @@ public class MTiempo {
                     // Tiempo de espera cuando llamo al boton ver alarma
                     if (USAR_SLEEP) {
                         Thread.sleep(5000);
-                        USAR_SLEEP=false;
+                        USAR_SLEEP = false;
                     } else {
                         // Acción que quiero que se produzca
-                        date=new Date();
+                        date = new Date();
                         Inicio.jDHora.setText(dateFormat.format(date));
 
                         // Llamada al metodo Sonar Alarma, para que vaya comparando
-                        if (Display.alarmON==true) {
+                        if (Display.alarmON == true) {
                             sonarAlarm();
                         }
                     }
@@ -72,69 +74,88 @@ public class MTiempo {
     }
 
     public void sonarAlarm() {
-        // Valor String que se le va a pasar, para alarma
 
         try {
-            Alarm=dateFormat.parse(dateInString);
+            Alarm = dateFormat.parse(dateInString);
             if (dateFormat.format(date).equalsIgnoreCase(dateFormat.format(Alarm))) {
-                System.out.println("hola");
+
                 //Implementar el sonido del reloj
+                Sounds.escuchar();
+
             }
         } catch (ParseException ex) {
+            Logger.getLogger(MTiempo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(MTiempo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public String addHora() {
+    public void addHora() {
         this.mSleep();
-        if (intHora<9) {
-            intHora+=1;
-            hora=String.valueOf(intHora);
-            return dateInString="0"+hora+":"+min+":00";
-        } else if (intHora<24&&intHora>=9) {
-            intHora+=1;
-            hora=String.valueOf(intHora);
-            return dateInString=hora+":"+min+":00";
+        intHora += 1;
+        if (intHora < 10) {
+
+            hora = "0" + String.valueOf(intHora);
+
+        } else if (intHora < 25 && intHora >= 10) {
+
+            hora = String.valueOf(intHora);
+
         } else {
-            intHora=0;
-            hora=String.valueOf(intHora);
-            return dateInString=hora+":"+min+":00";
+            intHora = 0;
+            hora = "00";
+
         }
+        this.devTiempo();
     }
 
-    public String addMin() {
+    public void addMin() {
         this.mSleep();
-        if (intMin<9) {
-            intMin+=1;
-            min=String.valueOf(intMin);
-            return dateInString=hora+":0"+min+":00";
-        } else if (intMin<59&&intMin>=9) {
-            intMin+=1;
-            min=String.valueOf(intMin);
-            return dateInString=hora+":"+min+":00";
+        intMin += numAumentar;
+        if (intMin < 10) {
+
+            min = "0" + String.valueOf(intMin);
+
+        } else if (intMin < 60 && intMin >= 10) {
+
+            min = String.valueOf(intMin);
+
         } else {
-            intMin=0;
-            min=String.valueOf(intMin);
-            return dateInString=hora+":0"+min+":00";
+            if (numAumentar == 5) {
+                min = "0" + String.valueOf(intMin - 60);
+                intMin = 0;
+            } else {
+                intMin = 0;
+                min = "00";
+            }
+
         }
+        this.devTiempo();
+    }
+
+    public String devTiempo() {
+        dateInString = hora + ":" + min + ":00";
+        return dateInString;
+
     }
 
     public String verAlarm() {
-
         this.mSleep();
         return dateInString;
 
     }
 
     public void mSleep() {
-        USAR_SLEEP=true;
+        USAR_SLEEP = true;
     }
 
     public void mSnooozer() {
+        Sounds.sonido.close();
+        numAumentar = 5;
+        this.addMin();
+        numAumentar = 1;
 
-        min=String.valueOf(intMin+5);
-        dateInString=hora+":"+(min)+":00";
     }
 
 }

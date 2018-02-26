@@ -20,8 +20,10 @@ import java.util.logging.Logger;
  */
 public class MTiempo {
 
+    /**
+     * Variables para hacer funcionar la hora del sistema
+     */
     Timer timer;
-
     SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     Date date;
 
@@ -33,12 +35,18 @@ public class MTiempo {
     static String hora = "00";
     static Integer intMin = 0;
     static String min = "00";
-
+    // Variable para alterna el aumento de los minutos, si es para mover los minutos, van de 1 en 1, pero si pulsamos Snooer aumenta 5
     static Integer numAumentar = 1;
 
     // Variable Sleep cuando ves la alarma
     static boolean USAR_SLEEP = false;
 
+    /**
+     * Metodo que muestra la Hora del sistema y lo repite cada segundo, a no ser
+     * que se cumpla la condición y lo duerma 5 segundos. También analiza si la
+     * alarma está activa y si es así hace llama al metodo que hace sonar la
+     * Alarma
+     */
     public void mostrarHora() {
         //creamos un Timer
         timer = new Timer();
@@ -49,7 +57,7 @@ public class MTiempo {
             public void run() {
 
                 try {
-                    // Tiempo de espera cuando llamo al boton ver alarma
+                    // Tiempo de espera cuando llamo al boton ver alarma,addHora y addMin
                     if (USAR_SLEEP) {
                         Thread.sleep(5000);
                         USAR_SLEEP = false;
@@ -73,6 +81,10 @@ public class MTiempo {
         timer.schedule(timerTask, 0, 1000);
     }
 
+    /**
+     * Metodo que hace sonar la alarma si la hora del sistema es igual a la
+     * alarma introducida
+     */
     public void sonarAlarm() {
 
         try {
@@ -91,6 +103,10 @@ public class MTiempo {
 
     }
 
+    /**
+     * Metodo que agrega 1 hora a la alarma y la formatea para que su
+     * visualizado sea correcto
+     */
     public void addHora() {
         this.mSleep();
         intHora += 1;
@@ -110,6 +126,11 @@ public class MTiempo {
         this.devTiempo();
     }
 
+    /**
+     * Metodo que agrega según convenga 1 o 5 min a la alarma y la formatea para
+     * que su visualizado sea correcto. Agregará 5 minutos, cuando pulsemos el
+     * botón Snoozer
+     */
     public void addMin() {
         this.mSleep();
         intMin += numAumentar;
@@ -134,28 +155,44 @@ public class MTiempo {
         this.devTiempo();
     }
 
+    /**
+     * Metodo que devuelve un string con la hora de la alarma
+     *
+     * @return String
+     */
     public String devTiempo() {
         dateInString = hora + ":" + min + ":00";
         return dateInString;
-
     }
 
+    /**
+     * Metodo que devuelve el valor de la hora de la alarma, para luego
+     * visualizarla
+     *
+     * @return String
+     */
     public String verAlarm() {
         this.mSleep();
         return dateInString;
 
     }
 
+    /**
+     * Metodo que cambia la variable, para poner a dormir el metodo mostrarHora
+     */
     public void mSleep() {
         USAR_SLEEP = true;
     }
 
+    /**
+     * Metodo con varias funciones, si está sonando la alarma, le quita el
+     * sonido y pospone la alarma para que vuelva a sonar en 5 min.
+     */
     public void mSnooozer() {
         Sounds.sonido.close();
         numAumentar = 5;
         this.addMin();
         numAumentar = 1;
-
     }
 
 }

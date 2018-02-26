@@ -1,20 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reloj.alarma;
 
-/**
- *
- * @author ablancoabalde
- */
 public class Inicio extends javax.swing.JFrame {
 
-    Display ds=new Display();
-    MTiempo mt = new MTiempo();
     /**
-     * Creates new form Inicio
+     * Inicializamos las clases
+     */
+    Display ds = new Display();
+    MTiempo mt = new MTiempo();
+
+    /**
+     * metodo inicio que contiene la imagen de un altavo e pone a funcionar el
+     * reloj
      */
     public Inicio() {
         initComponents();
@@ -147,28 +143,50 @@ public class Inicio extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Botón pospone 5 min la alarma
+     *
+     * @param evt
+     */
     private void jBposponerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBposponerActionPerformed
-        // Boton pospone los beeps, 5 min
+        // Botón pospone los beeps, 5 min
         mt.mSnooozer();
     }//GEN-LAST:event_jBposponerActionPerformed
-
+    /**
+     * Botón que agrega +1 a la hora de la alarma
+     *
+     * @param evt
+     */
     private void jBhoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBhoraActionPerformed
         // agrega horas a la alarma
         ds.verAddAlarmH();
     }//GEN-LAST:event_jBhoraActionPerformed
-
+    /**
+     * Botón que agrega +1 a los min de la alarma
+     *
+     * @param evt
+     */
     private void jBminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBminActionPerformed
         // agrega minutos a la alarma
         ds.verAddAlarmM();
-        
+
     }//GEN-LAST:event_jBminActionPerformed
 
+    /**
+     * Botón que activa y desactiva la alarma
+     *
+     * @param evt
+     */
     private void jBpAlarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpAlarmActionPerformed
         //Activar Desactivar la alarma
         ds.AcDesAlarm();
     }//GEN-LAST:event_jBpAlarmActionPerformed
 
+    /**
+     * Botón que intercambia la vista para ver la alarma
+     *
+     * @param evt
+     */
     private void JBverHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBverHoraActionPerformed
         // Ver alarma
         ds.verAlarm();

@@ -3,6 +3,7 @@ package reloj.alarma;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import static reloj.alarma.Inicio.*;
 
 /**
  * Clase en la que se muestran los metodos de visualización de la aplicación
@@ -12,11 +13,10 @@ import javax.swing.ImageIcon;
 public class Display {
 
     /**
-     * Inicialización de la clase Metodos Tiempo y una variable estatica que nos
-     * servirá, para controlar si la alarma se activa o se desactiva
+     * Variable estatica que nos sirve, para controlar si la alarma se activa o
+     * se desactiva
      */
-    MTiempo mt = new MTiempo();
-    static Boolean alarmON = false;
+    static Boolean alarmON=false;
 
     /**
      * Inserta la imagen en una etiqueta label y la redimensiona sabiendo el
@@ -28,20 +28,20 @@ public class Display {
     public static void insImgSpeaker(Integer width, Integer height) {
 
         // Habilitar para ver imagenes en Windows
-        ImageIcon icono = new ImageIcon("D:\\NeatBeansProjects\\COD_reloj\\src\\source\\speaker.png");
+        //     ImageIcon icono = new ImageIcon("D:\\NeatBeansProjects\\COD_reloj\\src\\source\\speaker.png");
+        ImageIcon icono=new ImageIcon("/home/local/DANIELCASTELAO/ablancoabalde/NetBeansProjects/COD/COD_reloj/src/source/speaker.png");
+
         // Habilitar para ver imagenes en Linux
-        //       ImageIcon icono=new ImageIcon("src/source/speaker.png");
-        // Escala la imagen al tamaño de la label
-        Icon icon = new ImageIcon(icono.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
-        Inicio.imgSpeaker.setIcon(icon);
+        Icon icon=new ImageIcon(icono.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+        imgSpeaker.setIcon(icon);
 
     }
 
     /**
      * Metodo que hace la llamada de mostrar la hora
      */
-    public void insHora() {
-        mt.mostrarHora();
+    public static void insHora() {
+        MTiempo.mostrarHora();
     }
 
     /**
@@ -49,16 +49,20 @@ public class Display {
      * RadioButton. Si está activa y llega a la hora de la alarma hace sonar la
      * alarma y si pulsando cuando esté sonando apaga la musica
      */
-    public void AcDesAlarm() {
+    public static void AcDesAlarm() {
 
-        if (alarmON == false) {
-            Inicio.jRAlarmaOn.setSelected(true);
-            mt.sonarAlarm();
-            alarmON = true;
+        if (alarmON==false) {
+            jRAlarmaOn.setSelected(true);
+            jBposponer.setEnabled(true);
+            MTiempo.sonarAlarm();
+            alarmON=true;
         } else {
-            Inicio.jRAlarmaOn.setSelected(false);
-            Sounds.sonido.close();
-            alarmON = false;
+            jRAlarmaOn.setSelected(false);
+            jBposponer.setEnabled(false);
+            if (Sounds.sSuena==true) {
+                Sounds.sonido.close();
+            }
+            alarmON=false;
         }
 
     }
@@ -66,26 +70,46 @@ public class Display {
     /**
      * LLama al metodo que agrega horas e inserta el resultado en un TextField
      */
-    public void verAddAlarmH() {
-        mt.addHora();
-        Inicio.jDHora.setText(mt.devTiempo());
+    public static void verAddAlarmH() {
+        MTiempo.addHora();
+        jDHora.setText(MTiempo.devTiempo());
 
     }
 
     /**
      * LLama al metodo que agrega minutos e inserta el resultado en un TextField
      */
-    public void verAddAlarmM() {
-        mt.addMin();
-        Inicio.jDHora.setText(mt.devTiempo());
+    public static void verAddAlarmM() {
+        MTiempo.addMin();
+        jDHora.setText(MTiempo.devTiempo());
 
     }
 
     /**
      * Muestra a que hora a sido programada la alarma
      */
-    public void verAlarm() {
-        Inicio.jDHora.setText(mt.verAlarm());
+    public static void verAlarm() {
+
+        jDHora.setText(MTiempo.verAlarm());
+
+    }
+
+    /**
+     * Metodo que cambia el texto del boton Jbverhora, para motrar Alarma cuando
+     * estés en modo Alarma y Hora cuando estes en modo Hora
+     *
+     * @param opciones Son opciones que reciben para meter un texto u otro
+     */
+    public static void cambiarTextHA(Integer opciones) {
+
+        switch (opciones) {
+            case 1:
+                jBverhora.setText("Hora");
+                break;
+            case 2:
+                jBverhora.setText("Alarma");
+                break;
+        }
 
     }
 

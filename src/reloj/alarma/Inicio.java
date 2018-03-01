@@ -5,9 +5,6 @@ public class Inicio extends javax.swing.JFrame {
     /**
      * Inicializamos las clases
      */
-    Display ds = new Display();
-    MTiempo mt = new MTiempo();
-
     /**
      * metodo inicio que contiene la imagen de un altavo e pone a funcionar el
      * reloj
@@ -18,7 +15,11 @@ public class Inicio extends javax.swing.JFrame {
         Display.insImgSpeaker(imgSpeaker.getWidth(), imgSpeaker.getHeight());
 
         // Inserta la hora en TextField
-        ds.insHora();
+        Display.insHora();
+        
+        // Deshabilitamos el Boton Snoozer, para que solo este activo 
+        // cuando la alarma esté activa
+        jBposponer.setEnabled(false);
 
     }
 
@@ -34,7 +35,7 @@ public class Inicio extends javax.swing.JFrame {
         jDHora = new javax.swing.JTextField();
         jRAlarmaOn = new javax.swing.JRadioButton();
         jBposponer = new javax.swing.JButton();
-        JBverHora = new javax.swing.JButton();
+        jBverhora = new javax.swing.JButton();
         imgSpeaker = new javax.swing.JLabel();
         jBpAlarm = new javax.swing.JButton();
         jBmin = new javax.swing.JButton();
@@ -59,11 +60,11 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        JBverHora.setText("Hora/Alarm");
-        JBverHora.setMargin(new java.awt.Insets(2, 3, 2, 3));
-        JBverHora.addActionListener(new java.awt.event.ActionListener() {
+        jBverhora.setText("Hora");
+        jBverhora.setMargin(new java.awt.Insets(2, 3, 2, 3));
+        jBverhora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBverHoraActionPerformed(evt);
+                jBverhoraActionPerformed(evt);
             }
         });
 
@@ -101,17 +102,21 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(jRAlarmaOn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBposponer)
-                        .addGap(56, 56, 56)
-                        .addComponent(JBverHora)
+                        .addGap(29, 29, 29)
+                        .addComponent(jBverhora, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jBmin, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBhora, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBpAlarm, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imgSpeaker, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jBpAlarm, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(imgSpeaker, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,16 +130,17 @@ public class Inicio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jBposponer, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jBverhora, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                                .addComponent(jDHora, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jBhora)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBmin))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(JBverHora, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBposponer, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                        .addComponent(jDHora, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBmin)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(jRAlarmaOn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
@@ -149,8 +155,10 @@ public class Inicio extends javax.swing.JFrame {
      * @param evt
      */
     private void jBposponerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBposponerActionPerformed
-        // Botón pospone los beeps, 5 min
-        mt.mSnooozer();
+        // Botón pospone los beeps, 5 min       
+      
+            MTiempo.mSnooozer();        
+
     }//GEN-LAST:event_jBposponerActionPerformed
     /**
      * Botón que agrega +1 a la hora de la alarma
@@ -159,7 +167,7 @@ public class Inicio extends javax.swing.JFrame {
      */
     private void jBhoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBhoraActionPerformed
         // agrega horas a la alarma
-        ds.verAddAlarmH();
+        Display.verAddAlarmH();
     }//GEN-LAST:event_jBhoraActionPerformed
     /**
      * Botón que agrega +1 a los min de la alarma
@@ -168,7 +176,7 @@ public class Inicio extends javax.swing.JFrame {
      */
     private void jBminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBminActionPerformed
         // agrega minutos a la alarma
-        ds.verAddAlarmM();
+        Display.verAddAlarmM();
 
     }//GEN-LAST:event_jBminActionPerformed
 
@@ -179,7 +187,7 @@ public class Inicio extends javax.swing.JFrame {
      */
     private void jBpAlarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpAlarmActionPerformed
         //Activar Desactivar la alarma
-        ds.AcDesAlarm();
+        Display.AcDesAlarm();
     }//GEN-LAST:event_jBpAlarmActionPerformed
 
     /**
@@ -187,10 +195,10 @@ public class Inicio extends javax.swing.JFrame {
      *
      * @param evt
      */
-    private void JBverHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBverHoraActionPerformed
+    private void jBverhoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBverhoraActionPerformed
         // Ver alarma
-        ds.verAlarm();
-    }//GEN-LAST:event_JBverHoraActionPerformed
+        Display.verAlarm();        
+    }//GEN-LAST:event_jBverhoraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,12 +236,12 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JBverHora;
     public static javax.swing.JLabel imgSpeaker;
     private javax.swing.JButton jBhora;
     private javax.swing.JButton jBmin;
     private javax.swing.JButton jBpAlarm;
-    private javax.swing.JButton jBposponer;
+    public static javax.swing.JButton jBposponer;
+    public static javax.swing.JButton jBverhora;
     public static javax.swing.JTextField jDHora;
     public static javax.swing.JRadioButton jRAlarmaOn;
     // End of variables declaration//GEN-END:variables

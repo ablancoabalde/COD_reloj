@@ -182,6 +182,7 @@ public class MTiempo {
 
     /**
      * Metodo que cambia la variable, para poner a dormir el metodo mostrarHora
+     * y cambia el texto del botón jBverhora
      */
     public static void mSleep() {
         // Llamada al metodo para cambiar

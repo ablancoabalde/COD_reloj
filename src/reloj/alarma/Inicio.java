@@ -2,13 +2,7 @@ package reloj.alarma;
 
 public class Inicio extends javax.swing.JFrame {
 
-    /**
-     * Inicializamos las clases
-     */
-    /**
-     * metodo inicio que contiene la imagen de un altavo e pone a funcionar el
-     * reloj
-     */
+
     public Inicio() {
         initComponents();
         // Imagen del altavoz
@@ -20,7 +14,6 @@ public class Inicio extends javax.swing.JFrame {
         // Deshabilitamos el Boton Snoozer, para que solo este activo 
         // cuando la alarma esté activa
         jBposponer.setEnabled(false);
-
     }
 
     /**
@@ -155,10 +148,8 @@ public class Inicio extends javax.swing.JFrame {
      * @param evt
      */
     private void jBposponerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBposponerActionPerformed
-        // Botón pospone los beeps, 5 min       
-      
+        // Botón pospone los beeps, 5 min    
             MTiempo.mSnooozer();        
-
     }//GEN-LAST:event_jBposponerActionPerformed
     /**
      * Botón que agrega +1 a la hora de la alarma
